@@ -30,11 +30,13 @@ transaction after you patch.
 
 ## What we build
 
-| Repository | What it is |
-| --- | --- |
-| [strix-web3](https://github.com/hashward-io/strix-web3) | Open-source AI auditor for smart contracts. Multi-ecosystem, sandboxed, findings carry runnable proof-of-concept exploits. Apache-2.0. |
-| [chainreview](https://github.com/hashward-io/chainreview) | The terminal harness behind our review pipeline: the event protocol, the policy engine and the operator TUI. |
-| [hashward-design-system](https://github.com/hashward-io/hashward-design-system) | Design tokens, the reference control plane, and the source of hashward.io. |
+- **Contract audits** for EVM, Solana and Move. Two reviewers read the code, every
+  exploitable finding ships with a runnable proof of concept, and the retest after
+  your patch is part of the engagement.
+- **Research** on protocol invariants, oracle design, bridge messaging and the
+  economic assumptions that hold a protocol together.
+- **Open-source tooling** for automated smart-contract review, released per project
+  as it is finished. The code is not in this organisation's public repositories.
 
 ## The people
 
