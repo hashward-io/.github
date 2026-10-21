@@ -46,3 +46,26 @@ contains no generated output.
 
 State what you ran and what it returned. "Tests pass" without the command and
 the result is not evidence.
+
+## Private repositories
+
+Every repository is private. The current GitHub plan does not provide branch
+protection, rulesets, or native secret scanning for private repositories, so the
+controls are:
+
+- `scripts/install-hooks.sh` installs a `pre-push` hook that refuses a direct
+  push to `main`. Bypass once with `ALLOW_MAIN_PUSH=1 git push`; the audit
+  records the result.
+- CI runs gitleaks on every push and pull request. A finding fails the build.
+- Dependabot alerts and security updates run per repository.
+- The audit workflow on `main` records every direct push, every merge without a
+  green gate, and every merge without a non-author approval.
+
+These controls detect and record; they do not prevent. Required reviews,
+force-push blocking and native secret scanning need GitHub Team (or an
+equivalent plan). Until then, treat the CI result as the gate and do not merge
+on a red or missing run.
+
+### After cloning
+
+Run `scripts/install-hooks.sh` once. Without it the pre-push guard is absent.
