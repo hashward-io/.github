@@ -1,0 +1,41 @@
+/* Hashward design system · 1.1.0. Canonical source; sync vendored copies with sync.py. */
+:root {
+  color-scheme: dark;
+  --hw-ink: #0c0c0b;
+  --hw-surface: #161614;
+  --hw-paper: #f3efe4;
+  --hw-text: #f2efe8;
+  --hw-muted: #b4aea2;
+  --hw-subtle: #969084;
+  --hw-accent: #e24a2a;
+  --hw-accent-text: #ff886d;
+  --hw-on-paper: #211f1a;
+  --hw-paper-muted: #645e53;
+  --hw-danger-ink: #ae301a;
+  --hw-line: #34332e;
+  --hw-line-strong: #57534b;
+  --hw-success: #a6c9ad;
+  --hw-warning: #e7c078;
+  --hw-info: #a5c9de;
+  --hw-font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --hw-font-body: "Instrument Sans", "Avenir Next", "Segoe UI", sans-serif;
+  --hw-font-code: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --hw-text-xs: 0.75rem;
+  --hw-text-sm: 0.875rem;
+  --hw-text-base: 1rem;
+  --hw-text-lg: 1.125rem;
+  --hw-heading: clamp(2.75rem, 5.5vw, 4.75rem);
+  --hw-space-1: 0.25rem;
+  --hw-space-2: 0.5rem;
+  --hw-space-3: 0.75rem;
+  --hw-space-4: 1rem;
+  --hw-space-6: 1.5rem;
+  --hw-space-8: 2rem;
+  --hw-space-12: 3rem;
+  --hw-space-16: 4rem;
+  --hw-radius: 3px;
+  --hw-width: 1120px;
+  --hw-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --hw-duration: 160ms;
+  --hw-shadow-paper: 0 20px 48px -24px #000b;
+}

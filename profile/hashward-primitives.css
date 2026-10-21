@@ -1,0 +1,155 @@
+/* Framework-independent primitives. Import after tokens.css. */
+.hw-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--hw-font-body);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  color: var(--hw-text);
+  white-space: nowrap;
+}
+.hw-brand::before {
+  content: "";
+  width: 0.6rem;
+  height: 0.6rem;
+  background: var(--hw-accent);
+  flex: none;
+}
+.hw-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--hw-space-2);
+  min-height: 44px;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: var(--hw-radius);
+  background: var(--hw-paper);
+  color: var(--hw-ink);
+  font: 500 var(--hw-text-sm)/1.4 var(--hw-font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--hw-duration) var(--hw-ease),
+    border-color var(--hw-duration) var(--hw-ease);
+}
+.hw-button:hover {
+  background: white;
+  color: var(--hw-ink);
+}
+.hw-button--secondary {
+  background: transparent;
+  border-color: var(--hw-line-strong);
+  color: var(--hw-text);
+}
+.hw-button--secondary:hover {
+  background: var(--hw-surface);
+  color: var(--hw-text);
+  border-color: var(--hw-muted);
+}
+.hw-button--ink {
+  background: var(--hw-ink);
+  color: var(--hw-paper);
+}
+.hw-button--ink:hover {
+  background: #292722;
+  color: var(--hw-paper);
+}
+.hw-button--outline-ink {
+  background: transparent;
+  color: var(--hw-ink);
+  border-color: var(--hw-paper-muted);
+}
+.hw-button--outline-ink:hover {
+  background: #e6e0d2;
+}
+.hw-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.hw-badge {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: var(--hw-radius);
+  font: 500 0.6875rem/1.4 var(--hw-font-code);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--hw-muted);
+}
+.hw-badge[data-tone="danger"] {
+  color: var(--hw-accent-text);
+}
+.hw-badge[data-tone="warning"] {
+  color: var(--hw-warning);
+}
+.hw-badge[data-tone="success"] {
+  color: var(--hw-success);
+}
+.hw-badge[data-tone="info"] {
+  color: var(--hw-info);
+}
+.hw-kicker {
+  font: 500 var(--hw-text-xs)/1.6 var(--hw-font-code);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hw-accent-text);
+}
+.hw-paper {
+  background: var(--hw-paper);
+  color: var(--hw-on-paper);
+  padding: var(--hw-space-8);
+  border-radius: var(--hw-radius);
+  box-shadow: var(--hw-shadow-paper);
+}
+.hw-paper .hw-kicker {
+  color: var(--hw-danger-ink);
+}
+.hw-paper .hw-badge {
+  color: var(--hw-paper-muted);
+}
+.hw-paper .hw-badge[data-tone="danger"] {
+  color: var(--hw-danger-ink);
+}
+.hw-paper .hw-badge[data-tone="warning"] {
+  color: #78551a;
+}
+.hw-paper .hw-badge[data-tone="success"] {
+  color: #3c6444;
+}
+.hw-paper .hw-badge[data-tone="info"] {
+  color: #365f77;
+}
+:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 2px solid var(--hw-accent-text);
+  outline-offset: 4px;
+}
+.hw-paper :where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline-color: var(--hw-danger-ink);
+}
+.hw-skip {
+  position: fixed;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+}
+.hw-skip:focus {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

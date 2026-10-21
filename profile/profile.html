@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hashward — organisation profile</title>
+<meta name="theme-color" content="#0c0c0b" />
+<meta name="color-scheme" content="dark" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="hashward-tokens.css" />
+<link rel="stylesheet" href="hashward-primitives.css" />
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+  /* Poster layout: the whole organisation profile as one rendered image.
+     Everything else is the Hashward design system, vendored unchanged.
+
+     1200px is deliberate: GitHub renders a README at roughly 890px, so this
+     keeps body copy at ~12px on screen instead of ~9.5px. */
+  html, body { width: 1200px; }
+  .poster { width: 1200px; }
+
+  /* the reveal system is scroll-driven; a static render shows everything */
+  .reveal { opacity: 1 !important; transform: none !important; }
+
+  .poster__bar {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 26px 28px 24px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .poster__bar .hw-brand { font-size: 1.5rem; }
+  .poster__bar > span:last-child {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  .poster .hero { padding: 64px 28px 56px; }
+  .poster .hero h1 { font-size: 4.4rem; }
+  .poster .pull { padding: 58px 28px 20px; }
+  .poster .pull p { max-width: 30ch; }
+  .poster .section { padding: 52px 28px; }
+  .poster .section__head { margin-bottom: 26px; max-width: 34ch; }
+  .poster .section__head h2 { max-width: 34ch; }
+
+  /* four kinds of work, as a two-column editorial grid */
+  .poster .work { display: grid; grid-template-columns: 1fr 1fr; column-gap: 68px; }
+  .poster .work li { grid-template-columns: 54px 1fr; padding: 24px 0 22px; border-bottom: 1px solid var(--line); }
+  .poster .work h3 { font-size: 1.75rem; }
+  .poster .work p { font-size: 0.98rem; }
+
+  .poster .team { gap: 0; }
+  .poster .team__row { padding: 16px 0; }
+
+  .poster .method { gap: 64px; }
+  .poster .term { margin-top: 0; }
+
+  .poster .band { margin-top: 0; }
+  .poster .band__inner { padding: 62px 28px 66px; }
+  .poster .band h2 { font-size: 4.4rem; }
+  .poster .band__note { margin: 14px 0 0; }
+
+  /* the grain overlay is a scroll-time texture; in a static render it is
+     only noise, and it wrecks the PNG compression. */
+  .grain { display: none; }
+</style>
+</head>
+<body>
+  <div class="poster">
+
+    <header class="poster__bar">
+      <span class="hw-brand">Hashward</span>
+      <span>Security audits · EVM &amp; Solana</span>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero__copy">
+          <p class="kicker">Security audits · EVM &amp; Solana</p>
+          <h1>We try to <em>drain</em> it before anyone else can.</h1>
+          <p class="lede">Hashward audits smart contracts for teams about to ship. Three people read the code. If a bug can move funds, the report includes a transaction that does it — and we rerun that transaction after you patch.</p>
+          <div class="hero__actions">
+            <span class="hw-button">Request an audit</span>
+            <span class="hw-button hw-button--secondary">See a finding</span>
+          </div>
+        </div>
+
+        <div class="sheet">
+          <article class="report">
+            <p class="sample-label">Illustrative report · not a client finding</p>
+            <header class="report__head">
+              <span>HW-2026-014</span>
+              <span>Confidential</span>
+            </header>
+            <h2>Vault.sol</h2>
+            <p class="report__who">withdraw() · marked by reviewer B</p>
+            <div class="report__code">
+              <ol>
+                <li><code>function withdraw(uint256 amt) external {</code></li>
+                <li><code>  require(bal[msg.sender] &gt;= amt);</code></li>
+                <li class="hit"><code>  (bool ok,) = msg.sender.call{value: amt}("");</code></li>
+                <li><code>  require(ok);</code></li>
+                <li class="hit"><code>  bal[msg.sender] -= amt;</code></li>
+                <li><code>}</code></li>
+              </ol>
+              <p class="report__margin">re-enters<br>before the write</p>
+            </div>
+            <div class="report__find">
+              <span class="stamp">Critical</span>
+              <p>A receiver re-enters <code>withdraw</code> before the balance write and empties the vault. PoC in the appendix. Fix: checks-effects-interactions, then <code>nonReentrant</code>.</p>
+            </div>
+            <footer class="report__foot">
+              <span>3 readers</span>
+              <span>11 days</span>
+              <span>retest open</span>
+            </footer>
+          </article>
+        </div>
+      </section>
+
+      <section class="facts">
+        <div><b>01</b><span>Solidity, Vyper, Anchor, Move</span></div>
+        <div><b>02</b><span>Three people, separate notes</span></div>
+        <div><b>03</b><span>Retest included in the fee</span></div>
+      </section>
+
+      <section class="pull">
+        <p>Most reports list smells. Ours includes the transaction that takes the funds.</p>
+      </section>
+
+      <section class="section" id="work">
+        <div class="section__head">
+          <p class="kicker">What you hire us for</p>
+          <h2>Four kinds of work. Same standard on each.</h2>
+        </div>
+        <ol class="work">
+          <li>
+            <span class="work__n">01</span>
+            <div>
+              <h3>Contract review</h3>
+              <p>Every function in scope, read by hand. Reentrancy, access control, accounting, proxies, upgrade paths. If it can move funds the wrong way, you get a runnable proof of concept, not a suggestion.</p>
+            </div>
+          </li>
+          <li>
+            <span class="work__n">02</span>
+            <div>
+              <h3>Economic review</h3>
+              <p>Oracles, liquidation, MEV, and the incentive that breaks once real volume shows up. These sit between functions. A linter will not find them.</p>
+            </div>
+          </li>
+          <li>
+            <span class="work__n">03</span>
+            <div>
+              <h3>Fuzzing and proofs</h3>
+              <p>Foundry and Echidna against the invariants you claim. Halmos where a property has to hold for every input.</p>
+            </div>
+          </li>
+          <li>
+            <span class="work__n">04</span>
+            <div>
+              <h3>Fix retest</h3>
+              <p>You patch. We rerun the original proof of concept against the diff. The report stays private unless you ask us to publish it.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="section" id="team">
+        <div class="section__head">
+          <p class="kicker">The team</p>
+          <h2>Three people read the code.</h2>
+        </div>
+        <div class="team">
+          <div class="team__row">
+            <b>M.H</b>
+            <span>@NetVar1337</span>
+            <span>Security research, protocol design, the tooling behind the review.</span>
+          </div>
+          <div class="team__row">
+            <b>Val Alexander</b>
+            <span>@BunsDev</span>
+            <span>Open-source tooling, TypeScript, the console the reviewers work in.</span>
+          </div>
+          <div class="team__row">
+            <b>Lars van der Zande</b>
+            <span>@lmvdz</span>
+            <span>The training pipeline behind the review: how a finding gets proposed, challenged and scored.</span>
+          </div>
+        </div>
+        <p class="team__note">No personas, no offshore second pass, no report assembled from a scanner dump. The three people who read the code sign the report.</p>
+      </section>
+
+      <section class="section method" id="method">
+        <div class="method__copy">
+          <p class="kicker">Method</p>
+          <h2>Three passes. Then we argue.</h2>
+          <p class="lede">Every reviewer misses what another one is stubborn about. We keep the notes separate until every pass is done, then reconcile them. Tooling runs in parallel so a broken invariant shows up even if all of us read past it.</p>
+          <dl class="passes">
+            <div><dt>Read</dt><dd>Intent, composition, and the attack the tools cannot imagine.</dd></div>
+            <div><dt>Fuzz</dt><dd>Generated inputs against the invariants you wrote down.</dd></div>
+            <div><dt>Prove</dt><dd>The few properties that have to hold for every input.</dd></div>
+          </dl>
+        </div>
+        <div class="term">
+          <div class="term__bar"><span>vault.sol</span><span>Illustrative output</span></div>
+          <div class="log">
+            <p class="log__cmd"><span class="dim">$</span> hashward run --suite full ./src</p>
+            <div class="log__row"><span class="ok">ok</span><span>slither</span><span>38 detectors</span><span>clean</span></div>
+            <div class="log__row"><span class="ok">ok</span><span>foundry fuzz</span><span>2,400,000 runs</span><span>0 breaks</span></div>
+            <div class="log__row log__row--bad"><span class="bad">!!</span><span>echidna</span><span>invariant</span><span class="bad">totalSupply</span></div>
+            <div class="log__row"><span class="ok">ok</span><span>halmos</span><span>symbolic</span><span>3 proven</span></div>
+            <p class="log__sum"><span class="bad">1 critical</span><span>2 high</span><span>3 medium</span><span>5 low</span></p>
+            <p class="log__cov">98.7% lines · 96.1% branches</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="engagement">
+        <div class="section__head">
+          <p class="kicker">An engagement</p>
+          <h2>One to three weeks. Price fixed before we start.</h2>
+        </div>
+        <ol class="steps">
+          <li><span>Scope</span><p>We read the docs and the threat model, name the contracts in scope, and send a flat quote. Nothing is billed before you accept it.</p></li>
+          <li><span>Review</span><p>Three people, independent notes, then a pass where we try to kill each other's findings.</p></li>
+          <li><span>Report</span><p>Severity, a runnable proof of concept, and the change we want. A document you can hand to the engineer who will fix it.</p></li>
+          <li><span>Retest</span><p>Included. We rerun the original proofs against your diff and say whether the hole is actually closed.</p></li>
+        </ol>
+      </section>
+
+      <section class="band" id="contact">
+        <div class="band__inner">
+          <p class="kicker kicker--ink">Next</p>
+          <h2>Send the repo.</h2>
+          <p>Scope, a timeline, and a flat quote. One business day. NDA if you want one.</p>
+          <p class="band__note">Send the repository, the docs and threat model if you have one, the setup we need to reproduce a finding, and a named reviewer we can ask about intent.</p>
+          <div class="band__actions">
+            <span class="hw-button hw-button--ink">hello@hashward.io</span>
+            <span class="hw-button hw-button--outline-ink">Book a call</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__inner">
+        <span class="hw-brand">Hashward</span>
+        <span>hello@hashward.io</span>
+        <span>github.com/hashward-io</span>
+        <span>© 2026</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Report the rendered height so the screenshot step can size the viewport exactly.
+    (function () {
+      function mark() {
+        document.title = "HW-H" + document.documentElement.scrollHeight;
+      }
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () { setTimeout(mark, 120); });
+      }
+      window.addEventListener("load", function () { setTimeout(mark, 120); });
+    })();
+  </script>
+</body>
+</html>
