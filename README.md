@@ -19,23 +19,10 @@ own copy:
 
 ## Using the secret scan
 
-Add this workflow to a repository as `.github/workflows/secret-scan.yml`:
-
-```yaml
-name: secret-scan
-
-on:
-  push:
-  pull_request:
-  workflow_dispatch:
-
-permissions:
-  contents: read
-
-jobs:
-  scan:
-    uses: hashward-io/.github/.github/workflows/secret-scan.yml@main
-```
+Every repository carries its own copy of
+`.github/workflows/secret-scan.yml`, so no runtime dependency crosses
+repositories. The copy in this repository is the canonical template: change it
+here, then copy it into each repository.
 
 The scan checks only the commits a push or pull request adds. A manual run scans
 the working tree. A repository with known synthetic fixtures can add a
