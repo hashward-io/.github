@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/hashward-io/.github/security/policy
+    about: Do not open a public issue for a vulnerability. Follow the security policy.
+  - name: Audit enquiry
+    url: https://hashward.io/#contact
+    about: Commercial audits, scope, and scheduling.
