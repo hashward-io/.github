@@ -1,0 +1,44 @@
+name: Feature request
+description: A capability the repository does not have yet.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What you cannot do today, and why it matters.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: The behaviour you want. Name the interface, file, or command.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Observable results that prove the feature works. One per line.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Existing tools, workarounds, or a smaller change that would do.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Engine / detection
+        - Sandbox / tooling
+        - CLI / TUI / viewer
+        - Reporting
+        - CI / release
+        - Documentation
+        - Other
+    validations:
+      required: true
